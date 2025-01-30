@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  web-pqrs:
+    image: nginx:stable-alpine3.19-slim
+    container_name: webpqrs
+    volumes:
+      - ./client/dist:/usr/share/nginx/html
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api-pqrs
+    networks:
+      - red-gane-int
+
+  api-pqrs:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api_pqrs_cont
+    image: api-pqrs:v1
+    networks:
+      - red-gane-int
+    environment:
+      - TZ=America/Bogota
+
+networks:
+  red-gane-int:
+    external: true
+    
