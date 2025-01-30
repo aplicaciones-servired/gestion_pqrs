@@ -2,16 +2,17 @@ FROM node:lts
 
 WORKDIR /app
 
-COPY . /app
-
 # Instalar dependencias necesarias
-RUN apt-get update && \
-    apt-get install -y 
+RUN npm install
 
-# Instalar dependencias desarrollo y construir la aplicación dentro de la imagen
-RUN npm install && \
-    npm run build
+# Copiar el resto del código de la aplicación
+COPY . .
 
+# Construir la aplicación
+RUN npm run build
+
+# Exponer el puerto en el que correrá la aplicación
 EXPOSE 80
 
+# Comando para iniciar la aplicación
 CMD ["npm", "start"]
