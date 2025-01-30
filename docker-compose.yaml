@@ -14,7 +14,7 @@ services:
 
   api-pqrs:
     build:
-      context: ./api
+      context: ./server
       dockerfile: Dockerfile
     container_name: api_pqrs_cont
     image: api-pqrs:v1
