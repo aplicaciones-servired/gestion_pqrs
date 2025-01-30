@@ -3,6 +3,7 @@ FROM node:lts
 WORKDIR /app
 
 COPY . /app
+COPY .env /app
 
 # Instalar dependencias necesarias
 RUN apt-get update && \
