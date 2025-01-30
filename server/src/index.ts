@@ -15,6 +15,10 @@ app.use(cors(
 ));
 app.use(log('dev'));
 
+// ! This is a simple route to test the server
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
