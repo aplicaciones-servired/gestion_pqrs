@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, Dispatch, ReactNode, SetStateAction } from 'react'
-import { URL_API_LOGIN, APP_NAME } from '../utils/contanst'
+import { LOGIN_URL, APP_NAME } from '../utils/contanst'
 import { LogoutAndDeleteToken } from '../services/LogOut'
 import { type User } from '../types/Interfaces'
 import axios from 'axios'
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return
     }
 
-    axios.get(`${URL_API_LOGIN}/profile`, { params: { app: APP_NAME } })
+    axios.get(`${LOGIN_URL}/profile`, { params: { app: APP_NAME } })
       .then(res => {
         if (res.status === 200) {
           setIsAuthenticated(true)
