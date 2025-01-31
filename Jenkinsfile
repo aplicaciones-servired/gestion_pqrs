@@ -54,7 +54,7 @@ pipeline {
       stage('delete images'){
         steps{
           script {
-          def images = 'api-pqrs:v1'
+          def images = 'ServerPqrs:v1'
             if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
               sh "docker rmi ${images}"
             } else {
