@@ -17,7 +17,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: serverpqrs_v1.0
-    image: ServerPqrs:v1
+    image: serverpqrs:v1
     networks:
       - red-gane-int
     environment:
