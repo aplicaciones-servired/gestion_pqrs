@@ -6,16 +6,16 @@ pipeline {
   }
 
   environment {
-    ENV_API_PQRS = credentials('ENV_API_PQRS')
-    ENV_CLIENT_PQRS = credentials('ENV_CLIENT_PQRS')
+    ENV_API = credentials('ENV_API_PQRS')
+    ENV_CLIENT = credentials('ENV_CLIENT_PQRS')
   }
     
   stages {
-    stage('Copy .env files') {
+    stage('Copy .env files and create') {
       steps {
         script {
-            def env_api = readFile(ENV_API_PQRS)
-            def env_client = readFile(ENV_CLIENT_PQRS)
+            def env_api = readFile(ENV_API)
+            def env_client = readFile(ENV_CLIENT)
                     
             writeFile file: './server/.env', text: env_api
             writeFile file: './client/.env', text: env_client
