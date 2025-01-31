@@ -1,13 +1,13 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  PORT: z.string().min(1, 'Variable PORT is required'),
-  ORIGIN: z.string().min(1, 'Variable ORIGIN is required').url().default('http://localhost:3000'),
-  DB_HOST: z.string().min(1, 'Variable DB_HOST is required'),
-  DB_PORT: z.string().min(1, 'Variable DB_PORT is required'),
-  DB_USER: z.string().min(1, 'Variable DB_USER is required'),
-  DB_PASS: z.string().min(1, 'Variable DB_PASS is required'),
-  DB_NAME: z.string().min(1, 'Variable DB_NAME is required'),
+  PORT: z.string(),
+  ORIGIN: z.string(),
+  DB_HOST: z.string(),
+  DB_PORT: z.string(),
+  DB_USER: z.string(),
+  DB_PASS: z.string(),
+  DB_NAME: z.string()
 })
 
 const { success, data, error } = envSchema.safeParse(process.env)
