@@ -14,7 +14,7 @@ pipeline {
     stage('Copy .env files and create') {
       steps {
         script {
-            def env_api = readFile(ENV_API_PQRS)
+            def env_api = readFile(ENV_API)
             def env_client = readFile(ENV_CLIENT)
                     
             writeFile file: './server/.env', text: env_api
