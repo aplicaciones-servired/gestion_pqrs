@@ -27,7 +27,7 @@ pipeline {
         steps {
           script {
             dir('client') {
-              sh 'npm install'
+              sh 'pnpm install'
             }
           }
         }
@@ -37,7 +37,7 @@ pipeline {
         steps {
           script {
             dir('client') {
-              sh 'npm run build'
+              sh 'pnpm run build'
             }
           }
         }
@@ -51,19 +51,19 @@ pipeline {
         }
       }
 
-      // stage('delete images'){
-      //   steps{
-      //     script {
-      //     def images = 'api-metas:v2.1'
-      //       if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
-      //         sh "docker rmi ${images}"
-      //       } else {
-      //         echo "Image ${images} does not exist."
-      //         echo "continuing... executing next steps"
-      //       }
-      //     }
-      //   }
-      // }
+      stage('delete images'){
+        steps{
+          script {
+          def images = 'api-pqrs:v1'
+            if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
+              sh "docker rmi ${images}"
+            } else {
+              echo "Image ${images} does not exist."
+              echo "continuing... executing next steps"
+            }
+          }
+        }
+      }
 
       stage('run docker compose'){
         steps {
