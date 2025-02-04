@@ -1,12 +1,12 @@
-import { URL_API_DATA } from '../utils/contanst'
 import { useEffect, useState } from 'react'
+import { API_URL } from '../utils/contanst'
 import axios from 'axios'
 
 function Home() {
   const [test, setTest] = useState('')
 
   useEffect(() => {
-    axios.get(`${URL_API_DATA}`)
+    axios.get(`${API_URL}/`)	
       .then(response => {
         console.log(response)
         setTest(response.data)

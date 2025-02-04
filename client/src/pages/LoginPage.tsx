@@ -1,4 +1,4 @@
-import { APP_NAME, URL_API_LOGIN } from '../utils/contanst'
+import { APP_NAME, LOGIN_URL} from '../utils/contanst'
 import { useAuth } from '../auth/AuthContext'
 import { FormEvent, useState } from 'react'
 import { toast, Toaster } from 'sonner'
@@ -12,7 +12,7 @@ function LoginPage() {
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
-    axios.post(`${URL_API_LOGIN}/login`, { username, password, app: APP_NAME })
+    axios.post(`${LOGIN_URL}/login`, { username, password, app: APP_NAME })
       .then(res => {
         if (res.status === 200) {
           setIsAuthenticated(true)

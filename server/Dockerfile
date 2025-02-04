@@ -2,11 +2,11 @@ FROM node:lts
 
 WORKDIR /app
 
-# Instalar dependencias necesarias
-RUN npm install
-
 # Copiar el resto del código de la aplicación
 COPY . .
+
+# Instalar dependencias necesarias
+RUN npm install
 
 # Construir la aplicación
 RUN npm run build

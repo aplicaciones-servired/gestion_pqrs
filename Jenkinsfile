@@ -6,16 +6,16 @@ pipeline {
   }
 
   environment {
-    ENV_API_PQRS = credentials('ENV_API_PQRS')
-    ENV_CLIENT_PQRS = credentials('ENV_CLIENT_PQRS')
+    ENV_API = credentials('ENV_API_PQRS')
+    ENV_CLIENT = credentials('ENV_CLIENT_PQRS')
   }
     
   stages {
-    stage('Copy .env files') {
+    stage('Copy .env files and create') {
       steps {
         script {
-            def env_api = readFile(ENV_API_PQRS)
-            def env_client = readFile(ENV_CLIENT_PQRS)
+            def env_api = readFile(ENV_API)
+            def env_client = readFile(ENV_CLIENT)
                     
             writeFile file: './server/.env', text: env_api
             writeFile file: './client/.env', text: env_client
@@ -27,7 +27,7 @@ pipeline {
         steps {
           script {
             dir('client') {
-              sh 'npm install'
+              sh 'pnpm install --no-frozen-lockfile'
             }
           }
         }
@@ -37,7 +37,7 @@ pipeline {
         steps {
           script {
             dir('client') {
-              sh 'npm run build'
+              sh 'pnpm run build'
             }
           }
         }
@@ -51,19 +51,19 @@ pipeline {
         }
       }
 
-      // stage('delete images'){
-      //   steps{
-      //     script {
-      //     def images = 'api-metas:v2.1'
-      //       if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
-      //         sh "docker rmi ${images}"
-      //       } else {
-      //         echo "Image ${images} does not exist."
-      //         echo "continuing... executing next steps"
-      //       }
-      //     }
-      //   }
-      // }
+      stage('delete images'){
+        steps{
+          script {
+          def images = 'serverpqrs:v1'
+            if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
+              sh "docker rmi ${images}"
+            } else {
+              echo "Image ${images} does not exist."
+              echo "continuing... executing next steps"
+            }
+          }
+        }
+      }
 
       stage('run docker compose'){
         steps {
