@@ -1,4 +1,5 @@
 import { PORT, ORIGIN } from './config/enviroments';
+import { ChatRouter } from './routes/chat.routes';
 
 import express from 'express';
 import log from 'morgan';
@@ -14,6 +15,8 @@ app.use(cors(
   }
 ));
 app.use(log('dev'));
+
+app.use('/', ChatRouter );
 
 // ! This is a simple route to test the server
 app.get('/', (req, res) => {
