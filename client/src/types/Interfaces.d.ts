@@ -8,3 +8,16 @@ export interface User {
   process: string,
   sub_process: string,
 }
+
+
+export interface cha_box {
+  EMPRESA:            string;
+  ID_PQR:             number;
+  FECHAREGISTRO:      Date;
+  TIPO_PQR:           string;
+  CLIENTE:            string;
+  DOCUMENTO:          number;
+  TELEFONO:           string;
+  CORREO_ELECTRONICO: string;
+  DESCRIPCION:        string;
+}
