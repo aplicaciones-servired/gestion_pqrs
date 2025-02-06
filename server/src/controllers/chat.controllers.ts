@@ -49,7 +49,7 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
       },
       order: ['fecharegistro']
     });
-    res.status(200).json({ message: 'Chat retrieved successfully' });
+    res.status(200).json(Chat);
 
   } catch (error) {
     console.error(error);
