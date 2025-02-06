@@ -4,21 +4,21 @@ import { Chat_box, initChatBoxModel } from '../model/chat_box.model';
 
 const EvaluarTipoMayores = (tipo1: string, tipo2: string) => `WHEN '${tipo1}' THEN '${tipo2}'`;
 
-export const getChat = async (req: Request, res: Response) => {
+export const getChat = async (req: Request, res: Response): Promise<void> => {
+
   const data = req.body;
   const { fecha1, fecha2, zona } = data;
 
   if (fecha1 === undefined || fecha2 === undefined) {
-    return res.status(400).json('Fecha no válida');
+    res.status(400).json('Fecha no válida');
   }
 
   if (zona === undefined) {
-    return res.status(400).json('Zona no válida');
+    res.status(400).json('Zona no válida');
   }
 
   const empresa = zona === '39627' ? 'Multired' : 'Servired';
   initChatBoxModel(zona);
-
   try {
     const Chat = await Chat_box.findAll({
       attributes: [
@@ -45,14 +45,15 @@ export const getChat = async (req: Request, res: Response) => {
         ['descripcion', 'DESCRIPCION']
       ],
       where: {
-        fecharegistro: { [Op.between]: [ fecha1, fecha2] }
+        fecharegistro: { [Op.between]: [fecha1, fecha2] }
       },
       order: ['fecharegistro']
     });
+    res.status(200).json({ message: 'Chat retrieved successfully' });
 
-    res.status(200).json(Chat);
   } catch (error) {
-    console.log(error);
-    res.status(500).json('Internal server error');
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
