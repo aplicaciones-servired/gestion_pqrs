@@ -10,7 +10,7 @@ export interface User {
 }
 
 
-export interface cha_box {
+export interface chat_bot {
   EMPRESA:            string;
   ID_PQR:             number;
   FECHAREGISTRO:      Date;
