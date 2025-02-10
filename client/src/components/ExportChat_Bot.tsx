@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { Fab } from '@mui/material'
 
 const generateExcelData = (datos: chat_bot[]): unknown[] => {
-  const titulo = [{ A: 'Reporte d los PQRS del CHAT BOT ' }]
+  const titulo = [{ A: 'Reporte de los PQRS del CHAT BOT ' }]
   const headers = [
     {
       A: 'EMPRESA',
