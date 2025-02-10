@@ -3,11 +3,12 @@ import { API_URL } from '../utils/contanst'
 import axios from 'axios'
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Fab } from '@mui/material'
 import { Input } from '@mui/material';
-import { cha_box } from '../types/Interfaces';
+import { chat_bot } from '../types/Interfaces';
 import { toast, Toaster } from 'sonner'
+import { BottonExporChat } from '../components/ExportChat_Bot';
 
 function Home() {
-  const [test, setTest] = useState<cha_box[]>([]);
+  const [test, setTest] = useState<chat_bot[]>([]);
   const [date1, setDate1] = useState<string>()
   const [date2, setDate2] = useState<string>()
   const [zona, setZona] = useState<string | undefined>(undefined)
@@ -52,18 +53,15 @@ function Home() {
             <option value='39628'>Servired</option>
           </select>
 
-          <Fab variant="extended" type='submit' color="success" aria-label="add">
+          <Fab variant="extended" type='submit' color="primary" aria-label="add">
             Solicitar Reporte
           </Fab>
 
         </form>
 
         <div className='flex gap-2 items-center'>
-          <p className='font-semibold'>Cantidad De Datos:</p>
-          <span className='px-2 py-1 text-sm font-semibold text-gray-800 bg-yellow-400 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-100 dark:border-gray-800'>
-            {test.length}
-          </span>
-
+          <p className='font-semibold'>Cantidad De Datos: {test.length}</p>
+          <div>{test.length > 0 ? <BottonExporChat datos={test} /> : null} </div>
         </div>
 
       </div>
