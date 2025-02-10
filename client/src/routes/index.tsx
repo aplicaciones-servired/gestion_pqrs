@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 import Root from './Root';
 
 
-const Home = lazy(() => import('../pages/Home'));
+const ReporteChat_box = lazy(() => import('../pages/ReporteChat_bot'));
 
 export const BrowserRouter = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ export const BrowserRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>
+        element: <Suspense fallback={<div>Loading...</div>}><ReporteChat_box /></Suspense>
       }
     ]
   }
