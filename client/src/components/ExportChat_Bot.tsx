@@ -22,7 +22,7 @@ const generateExcelData = (datos: chat_bot[]): unknown[] => {
   const rows = datos.map((it) => ({
     A: it.EMPRESA,
     B: it.ID_PQR,
-    C: it.FECHAREGISTRO,
+    C: new Date(it.FECHAREGISTRO).toLocaleDateString(),
     D: it.TIPO_PQR,
     E: it.CLIENTE,
     F: it.DOCUMENTO,
