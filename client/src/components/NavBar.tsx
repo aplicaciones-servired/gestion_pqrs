@@ -8,10 +8,7 @@ function NavBar() {
   
   const handleClick = () => {
     LogoutAndDeleteToken()
-      .then(res => {
-        console.log(res);
-        setIsAuthenticated(false);
-      });
+    setIsAuthenticated(false)
   };
 
   return (
