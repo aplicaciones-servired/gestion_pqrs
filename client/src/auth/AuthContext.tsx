@@ -1,33 +1,23 @@
 import { createContext, useContext, useEffect, useState, Dispatch, ReactNode, SetStateAction } from 'react'
-import { LOGIN_URL, APP_NAME } from '../utils/contanst'
+import { LOGIN_URL } from '../utils/contanst'
 import { LogoutAndDeleteToken } from '../services/LogOut'
 import { type User } from '../types/Interfaces'
 import axios from 'axios'
 
 interface IAuthContext {
   isAuthenticated: boolean
-  user: User
-  setUser: Dispatch<SetStateAction<User>>
+  user: User | null
+  setUser: Dispatch<SetStateAction<User| null>>
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>
 }
-
-const InitialUser: User = { username: '', email: '', names: '', lastnames: '', company: '', process: '', sub_process: '', id: '' }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User>(InitialUser)
+  const [user, setUser] = useState<User | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    const cookie = document.cookie
-
-    if (!cookie && cookie.split('=')[0] !== APP_NAME) {
-      setIsAuthenticated(false)
-      setUser(InitialUser)
-      return
-    }
-
     axios.get(`${LOGIN_URL}/profile`)
       .then(res => {
         if (res.status === 200) {
@@ -36,10 +26,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       })
       .catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           LogoutAndDeleteToken()
           setIsAuthenticated(false)
-          setUser(InitialUser)
+          setUser(null)
         }
       })
   }, [isAuthenticated])
