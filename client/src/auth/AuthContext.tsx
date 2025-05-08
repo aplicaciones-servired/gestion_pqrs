@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return
     }
 
-    axios.get(`${LOGIN_URL}/profile`, { params: { app: APP_NAME } })
+    axios.get(`${LOGIN_URL}/profile`)
       .then(res => {
         if (res.status === 200) {
           setIsAuthenticated(true)
