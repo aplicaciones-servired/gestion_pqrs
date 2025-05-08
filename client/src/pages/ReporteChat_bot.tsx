@@ -21,12 +21,7 @@ function Home() {
       return;
     }
 
-    const fecha1ISO = new Date(date1).toISOString(); // Fecha desde 00:00:00
-    const fecha2Obj = new Date(date2);
-    fecha2Obj.setHours(23, 59, 59, 999); // Fecha hasta 23:59:59
-    const fecha2ISO = fecha2Obj.toISOString();
-
-    axios.post(`${API_URL}/getChat`, { fecha1: fecha1ISO, fecha2: fecha2ISO, zona })
+    axios.post(`${API_URL}/getChat`, { fecha1: date1.slice(0, 10), fecha2: date2.slice(0, 10), zona })
       .then(res => {
         console.log(res.data)
         setTest(res.data)
