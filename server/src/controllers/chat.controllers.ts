@@ -9,10 +9,6 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
   const data = req.body;
   const { fecha1, fecha2, zona } = data;
 
-  const fechaInicio = new Date(fecha1);
-  const fechaFin = new Date(fecha2);
-  fechaFin.setHours(23, 59, 59, 999); 
-
   if (fecha1 === undefined || fecha2 === undefined) {
     res.status(400).json("Fecha no válida");
   }
@@ -49,10 +45,10 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
         ["descripcion", "DESCRIPCION"],
       ],
       where: {
-        fecharegistro: {
-          [Op.gte]: fechaInicio,
-          [Op.lte]: fechaFin, // Usamos lte en lugar de lt
-        },
+        [Op.and]: [
+          where(fn('DATE', literal('fecharegistro')), '>=', fecha1.slice(0, 10)),
+          where(fn('DATE', literal('fecharegistro')), '<=', fecha2.slice(0, 10))
+        ]
       },
       order: ["fecharegistro"],
     });
