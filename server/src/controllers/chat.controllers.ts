@@ -49,7 +49,10 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
         ["descripcion", "DESCRIPCION"],
       ],
       where: {
-        fecharegistro: { [Op.between]: [fechaInicio, fechaFin] },
+        fecharegistro: {
+          [Op.gte]: fechaInicio,
+          [Op.lte]: fechaFin, // Usamos lte en lugar de lt
+        },
       },
       order: ["fecharegistro"],
     });
