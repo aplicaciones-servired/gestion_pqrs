@@ -11,6 +11,7 @@ export const getChat = async (req: Request, res: Response): Promise<void> => {
 
   const fechaInicio = new Date(fecha1);
   const fechaFin = new Date(fecha2);
+  fechaFin.setHours(23, 59, 59, 999); 
 
   if (fecha1 === undefined || fecha2 === undefined) {
     res.status(400).json("Fecha no válida");
