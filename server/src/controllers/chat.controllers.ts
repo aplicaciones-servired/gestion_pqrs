@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { literal, Op } from "sequelize";
+import { literal, Op, where, fn } from "sequelize";
 import { Chat_box, initChatBoxModel } from "../model/chat_box.model";
 
 const EvaluarTipoMayores = (tipo1: string, tipo2: string) =>
