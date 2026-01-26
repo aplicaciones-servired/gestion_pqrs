@@ -36,7 +36,7 @@ function LoginPage() {
     <section className=''>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-        <div className='w-full bg-cyan-700 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-blue-200 dark:border-gray-700'>
+        <div className='w-full bg-blue-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-blue-200 dark:border-gray-700'>
           <div className='px-14 py-16'>
             <figure className='flex justify-center mb-6 text-2xl font-semibold text-gray-900 '>
               <img width={180} src='/gane.webp' alt='logo' />
