@@ -74,8 +74,8 @@ export const BottonExporChat = ({ datos }: { datos: chat_bot[] }): JSX.Element =
 
   return (
     <>
-      <Fab variant="extended" type='submit' color="success" aria-label="add" onClick={handleDownload}>
-        Solicitar Reporte
+      <Fab variant='extended' type='button' color='success' aria-label='exportar reporte' onClick={handleDownload}>
+        Exportar Excel
       </Fab>
     </>
   )

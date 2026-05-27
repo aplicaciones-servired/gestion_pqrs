@@ -19,9 +19,9 @@ function Root() {
   }
 
   return (
-    <section className='flex'>
+    <section className='flex min-h-screen bg-transparent text-slate-900'>
       <NavBar />
-      <main className='w-full'>
+      <main className='min-h-screen w-full overflow-hidden px-4 py-4 sm:px-6 lg:px-8 lg:py-6'>
         <Outlet />
       </main>
       <Toaster position='top-right' duration={5000} visibleToasts={4} richColors />
