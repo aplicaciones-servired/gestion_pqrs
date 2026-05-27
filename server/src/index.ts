@@ -6,11 +6,12 @@ import log from 'morgan';
 import cors from 'cors';
 
 const app = express();
+const allowedOrigins = ORIGIN.split(',').map(origin => origin.trim()).filter(Boolean);
 
 app.use(express.json());
 app.use(cors(
   {
-    origin: ORIGIN,
+    origin: allowedOrigins.length > 0 ? allowedOrigins : ORIGIN,
     credentials: true
   }
 ));

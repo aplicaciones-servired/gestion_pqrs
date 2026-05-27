@@ -11,7 +11,7 @@ export const BrowserRouter = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        index: true,
+        path: '/home',
         element: <Suspense fallback={<div>Loading...</div>}><ReporteChat_box /></Suspense>
       }
     ]

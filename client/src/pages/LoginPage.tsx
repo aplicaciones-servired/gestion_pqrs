@@ -1,21 +1,27 @@
-import { LOGIN_URL} from '../utils/contanst'
+import { LOGIN_URL } from '../utils/contanst'
 import { useAuth } from '../auth/AuthContext'
 import { FormEvent, useState } from 'react'
 import { toast, Toaster } from 'sonner'
 import axios from 'axios'
+import { User } from '../types/Interfaces';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
-  const { setIsAuthenticated } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
+  const { login, setUsernames } = useAuth();
+  const navigate = useNavigate();
+  
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
 
     axios.post(`${LOGIN_URL}/login`, { username, password })
       .then(res => {
         if (res.status === 200) {
-          setIsAuthenticated(true)
+          login()
+          const userData = res.data.user ?? res.data
+          setUsernames(userData as User)
+          navigate('/home')
         }
       })
       .catch(error => {
@@ -52,8 +58,8 @@ function LoginPage() {
               </div>
               <div>
                 <label className='block mb-2 text-sm font-medium text-gray-900 '>Contraseña</label>
-                <input className='bg-gray-50 rounded-lg  block w-full p-2.5 outline-blue-400' 
-                 onChange={ev => setPassword(ev.target.value)} type='password' placeholder='••••••••' required value={password}   />
+                <input className='bg-gray-50 rounded-lg  block w-full p-2.5 outline-blue-400'
+                  onChange={ev => setPassword(ev.target.value)} type='password' placeholder='••••••••' required value={password} />
               </div>
 
 
