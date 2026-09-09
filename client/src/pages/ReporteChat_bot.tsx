@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { API_URL } from '../utils/contanst'
 import axios from 'axios'
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Fab, Input } from '@mui/material'
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Fab } from '@mui/material'
 import { chat_bot } from '../types/Interfaces';
 import { toast, Toaster } from 'sonner'
 import { BottonExporChat } from '../components/ExportChat_Bot';
@@ -11,13 +11,6 @@ function Home() {
   const [date1, setDate1] = useState<string>()
   const [date2, setDate2] = useState<string>()
   const [zona, setZona] = useState<string | undefined>(undefined)
-  const descriptionStyle = {
-    display: '-webkit-box',
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: 'vertical' as const,
-    overflow: 'hidden',
-  }
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -64,12 +57,12 @@ function Home() {
         <form onSubmit={handleSubmit} className='mt-8 grid gap-4 xl:grid-cols-[1fr_1fr_1fr_auto]'>
           <label className='field-shell'>
             <span className='field-label'>Fecha inicial</span>
-            <Input type='date' disableUnderline className='field-input' value={date1} onChange={ev => setDate1(ev.target.value)} />
+            <input type='date' className='field-input' value={date1} onChange={ev => setDate1(ev.target.value)} />
           </label>
 
           <label className='field-shell'>
             <span className='field-label'>Fecha final</span>
-            <Input type='date' disableUnderline className='field-input' value={date2} onChange={ev => setDate2(ev.target.value)} />
+            <input type='date' className='field-input' value={date2} onChange={ev => setDate2(ev.target.value)} />
           </label>
 
           <label className='field-shell'>
@@ -132,7 +125,7 @@ function Home() {
                     <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{row.TELEFONO}</TableCell>
                     <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{row.CORREO_ELECTRONICO}</TableCell>
                     <TableCell className='!max-w-[28rem] !px-5 !py-4 text-sm leading-6 text-slate-700'>
-                      <p style={descriptionStyle}>{row.DESCRIPCION}</p>
+                      <p>{row.DESCRIPCION}</p>
                     </TableCell>
                   </TableRow>
                 ))
