@@ -2,11 +2,13 @@ version: '3.7'
 
 services:
   FrontEndPqrs:
-    image: nginx:stable-alpine3.19-slim
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: frontendpqrs:v1
     container_name: frontendpqrs_v1.0
     volumes:
-      - ./client/dist:/usr/share/nginx/html
-      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - ServerPqrs
     networks:

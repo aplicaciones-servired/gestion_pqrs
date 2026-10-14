@@ -85,48 +85,46 @@ function Home() {
       <div className='glass-panel overflow-hidden rounded-[2rem]'>
         <div className='border-b border-white/70 bg-white/60 px-6 py-4'>
           <p className='text-sm font-semibold uppercase tracking-[0.2em] text-slate-500'>Resultados</p>
-          <p className='mt-1 text-sm text-slate-600'>Las filas están optimizadas para lectura rápida, con una descripción resumida para mantener el ancho controlado.</p>
+          <p className='mt-1 text-sm text-slate-600'>Filtra por rango de fechas y empresa para generar el reporte.</p>
         </div>
-        <TableContainer component={Paper} className='max-h-[68vh] overflow-auto !bg-transparent !shadow-none'>
-          <Table stickyHeader size='small' className='min-w-[1200px]'>
+        <TableContainer component={Paper} className='!bg-transparent !shadow-none'>
+          <Table size='small' className='!min-w-full'>
             <TableHead>
               <TableRow>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>FECHA REGISTRO</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>TIPO PQR</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>CLIENTE</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>DOCUMENTO</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>TELEFONO</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>CORREO ELECTRONICO</TableCell>
-                <TableCell className='!bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>DESCRIPCION</TableCell>
+                <TableCell className='!w-[12%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>FECHA</TableCell>
+                <TableCell className='!w-[14%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>TIPO PQR</TableCell>
+                <TableCell className='!w-[16%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>CLIENTE</TableCell>
+                <TableCell className='!w-[10%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>DOCUMENTO</TableCell>
+                <TableCell className='!w-[10%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>TELEFONO</TableCell>
+                <TableCell className='!w-[16%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>CORREO</TableCell>
+                <TableCell className='!w-[22%] !bg-slate-100 !px-5 !py-4 !text-[11px] !font-black !tracking-[0.18em] !text-slate-600'>DESCRIPCION</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {test.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={9} className='!py-16 !text-center !text-sm !text-slate-500'>
-                    Aún no hay registros cargados. Usa el filtro superior para generar el reporte.
+                  <TableCell colSpan={7} className='!py-16 !text-center !text-sm !text-slate-500'>
+                    Aun no hay registros cargados. Usa el filtro superior para generar el reporte.
                   </TableCell>
                 </TableRow>
               ) : (
                 test.map((row, index) => (
                   <TableRow
-                    className='group transition odd:bg-white even:bg-slate-50/60 hover:bg-blue-50/80'
+                    className='group border-b border-slate-100 transition odd:bg-white even:bg-slate-50/60 hover:bg-blue-50/80'
                     hover
                     key={index}
                   >
-                    <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{new Date(row.FECHAREGISTRO).toLocaleDateString()}</TableCell>
+                    <TableCell className='!px-5 !py-4 text-sm text-slate-700 whitespace-nowrap'>{new Date(row.FECHAREGISTRO).toLocaleDateString()}</TableCell>
                     <TableCell className='!px-5 !py-4'>
                       <span className='inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200'>
                         {row.TIPO_PQR}
                       </span>
                     </TableCell>
-                    <TableCell className='!px-5 !py-4 text-sm text-slate-800'>{row.CLIENTE}</TableCell>
-                    <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{row.DOCUMENTO}</TableCell>
-                    <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{row.TELEFONO}</TableCell>
+                    <TableCell className='!px-5 !py-4 text-sm font-medium text-slate-800'>{row.CLIENTE}</TableCell>
+                    <TableCell className='!px-5 !py-4 text-sm text-slate-700 whitespace-nowrap'>{row.DOCUMENTO}</TableCell>
+                    <TableCell className='!px-5 !py-4 text-sm text-slate-700 whitespace-nowrap'>{row.TELEFONO}</TableCell>
                     <TableCell className='!px-5 !py-4 text-sm text-slate-700'>{row.CORREO_ELECTRONICO}</TableCell>
-                    <TableCell className='!max-w-[28rem] !px-5 !py-4 text-sm leading-6 text-slate-700'>
-                      <p>{row.DESCRIPCION}</p>
-                    </TableCell>
+                    <TableCell className='!px-5 !py-4 text-sm leading-6 text-slate-700'>{row.DESCRIPCION}</TableCell>
                   </TableRow>
                 ))
               )}
